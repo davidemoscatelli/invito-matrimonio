@@ -1,128 +1,169 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+
+const OPEN_DURATION = 1500;
 
 export default function Envelope({ onOpen, onPlayMusic }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isZooming, setIsZooming] = useState(false);
+  const [isOpening, setIsOpening] = useState(false);
+  const timeoutRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   const handleOpen = () => {
-    if (isOpen) return;
-    setIsOpen(true);
-    
-    // Attivazione immediata della musica per bypassare i blocchi di Safari/Chrome
-    if (onPlayMusic) onPlayMusic();
+    if (isOpening) return;
 
-    // Sequenza: apertura (0.8s) + uscita lettera (1s) + lettura, poi zoom
-    setTimeout(() => {
-      setIsZooming(true);
-      setTimeout(() => {
-        onOpen();
-      }, 1200); 
-    }, 2800); 
+    onPlayMusic?.();
+    setIsOpening(true);
+
+    timeoutRef.current = window.setTimeout(() => {
+      onOpen?.();
+    }, OPEN_DURATION);
   };
 
-  const paperTexture = "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E\")";
+  const paperTexture =
+    'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.8\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' opacity=\'0.04\'/%3E%3C/svg%3E")';
 
   return (
-    <motion.div 
-      className="fixed inset-0 flex items-center justify-center bg-stone-900 z-50 p-4"
-      animate={isZooming ? { opacity: 0, scale: 4 } : { opacity: 1, scale: 1 }}
-      transition={{ duration: 1.2, ease: "easeInOut" }}
+    <motion.div
+      className="fixed inset-0 z-50 overflow-hidden bg-[#E4DCCB]" // Sfondo scuro per sicurezza
+      initial={{ opacity: 1 }}
+      animate={isOpening ? { opacity: 0, filter: "blur(5px)" } : { opacity: 1, filter: "blur(0px)" }}
+      transition={{ duration: 0.8, delay: 0.6, ease: "easeInOut" }}
     >
-      {/* Busta con proporzione fissa 3/2 */}
-      <div 
-        className="relative w-[92vw] max-w-2xl aspect-[3/2] cursor-pointer group shadow-2xl mt-12 md:mt-0" 
+      <button
+        type="button"
         onClick={handleOpen}
+        disabled={isOpening}
+        aria-label="Apri l'invito"
+        className="relative block h-screen w-screen cursor-pointer outline-none overflow-hidden"
+        style={{ perspective: "1500px" }}
       >
-        
-        {/* Sfondo INTERNO */}
-        <div className="absolute inset-0 bg-[#c7b098] shadow-[inset_0_20px_50px_rgba(0,0,0,0.6)]">
-          <div className="absolute inset-0 mix-blend-multiply" style={{ backgroundImage: paperTexture }}></div>
-        </div>
+        {/* INTERNO SCURO (Visibile solo quando l'aletta si alza) */}
+        <div 
+          className="absolute inset-0 z-0" 
+          style={{ backgroundColor: "#C9BEA8", backgroundImage: paperTexture }} 
+        />
 
-        {/* La Lettera */}
-        <motion.div 
-          className="absolute left-4 right-4 bottom-2 bg-[#FAF9F6] flex flex-col items-center justify-start pt-8 md:pt-16 shadow-xl border border-stone-200"
-          style={{ height: '90%', zIndex: 10, backgroundImage: paperTexture }}
-          initial={{ y: 0 }}
-          animate={isOpen ? { y: '-40%' } : { y: 0 }} 
-          transition={{ duration: 1, delay: 0.8, ease: "easeOut" }} 
-        >
-           <h2 className="font-serif text-4xl md:text-6xl italic text-stone-700 mb-4 drop-shadow-sm">K & D</h2>
-           <div className="w-16 md:w-24 h-[1px] bg-stone-300 mb-4"></div>
-           <p className="text-stone-500 uppercase tracking-widest text-[10px] md:text-xs font-light">L'Invito</p>
-        </motion.div>
-
-        {/* Alette Laterali e Inferiore */}
-        <div className="absolute inset-0 z-20 pointer-events-none drop-shadow-lg">
-          <div className="absolute inset-0 bg-[#e8ddcd]" style={{ clipPath: 'polygon(0 0, 0 100%, 50% 50%)', backgroundImage: paperTexture }}></div>
-          <div className="absolute inset-0 bg-[#e8ddcd]" style={{ clipPath: 'polygon(100% 0, 100% 100%, 50% 50%)', backgroundImage: paperTexture }}></div>
-          <div className="absolute inset-0 bg-[#ede3d4]" style={{ clipPath: 'polygon(0 100%, 100% 100%, 50% 48%)', backgroundImage: paperTexture }}></div>
-        </div>
-
-        {/* Aletta SUPERIORE */}
-        <motion.div 
-          className="absolute top-0 left-0 w-full h-full origin-top drop-shadow-2xl"
-          initial={{ rotateX: 0, zIndex: 30 }}
-          animate={isOpen ? { rotateX: 180, zIndex: 5 } : { rotateX: 0, zIndex: 30 }}
-          transition={{ 
-            rotateX: { duration: 0.8, ease: "easeInOut" },
-            zIndex: { delay: 0.4 } 
+        {/* --- ALETTE LATERALI (Livello base) --- */}
+        <div
+          className="absolute inset-0 z-10"
+          style={{
+            clipPath: "polygon(0 0, 50% 50%, 0 100%)",
+            backgroundColor: "#EBE4D5",
+            backgroundImage: paperTexture,
           }}
-          style={{ transformStyle: 'preserve-3d' }}
-        >
-          <div 
-            className="absolute inset-0 bg-[#f0e5d8]"
-            style={{ clipPath: 'polygon(0 0, 100% 0, 50% 55%)', backfaceVisibility: 'hidden', backgroundImage: paperTexture }}
+        />
+        <div
+          className="absolute inset-0 z-10"
+          style={{
+            clipPath: "polygon(100% 0, 50% 50%, 100% 100%)",
+            backgroundColor: "#EBE4D5",
+            backgroundImage: paperTexture,
+          }}
+        />
+
+        {/* --- ALETTA INFERIORE (Sovrappone le laterali, crea la prima V) --- */}
+        <div
+          className="absolute inset-0 z-20 pointer-events-none"
+          style={{
+            clipPath: "polygon(0 100%, 50% 50%, 100% 100%)",
+            backgroundColor: "#F2ECE0",
+            backgroundImage: paperTexture,
+            // L'ombra applicata direttamente qui assicura che le linee si vedano
+            filter: "drop-shadow(0px -6px 15px rgba(0,0,0,0.12))",
+            WebkitFilter: "drop-shadow(0px -6px 15px rgba(0,0,0,0.12))"
+          }}
+        />
+
+        {/* --- ALETTA SUPERIORE ANIMATA (Sovrappone tutto, crea la X completa) --- */}
+        <motion.div
+          className="absolute inset-0 z-30 origin-top pointer-events-none"
+          initial={{ rotateX: 0 }}
+          animate={isOpening ? { rotateX: -25 } : { rotateX: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          style={{
+            clipPath: "polygon(0 0, 100% 0, 50% 50%)",
+            backgroundColor: "#FDFBF8",
+            backgroundImage: paperTexture,
+            // Cambia l'ombra mentre si apre
+            filter: isOpening 
+              ? "drop-shadow(0px 20px 20px rgba(0,0,0,0.3))" 
+              : "drop-shadow(0px 6px 15px rgba(0,0,0,0.15))",
+            WebkitFilter: isOpening 
+              ? "drop-shadow(0px 20px 20px rgba(0,0,0,0.3))" 
+              : "drop-shadow(0px 6px 15px rgba(0,0,0,0.15))",
+            transformStyle: "preserve-3d",
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
+          }}
+        />
+
+        {/* RETRO DELL'ALETTA SUPERIORE (Colore più scuro per dare profondità quando ruota in su) */}
+        <motion.div
+          className="absolute inset-0 z-25 origin-top pointer-events-none"
+          initial={{ rotateX: 0, opacity: 0 }}
+          animate={isOpening ? { rotateX: -25, opacity: 1 } : { rotateX: 0, opacity: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          style={{
+            clipPath: "polygon(0 0, 100% 0, 50% 50%)",
+            backgroundColor: "#D9CFBA",
+            backgroundImage: paperTexture,
+            transform: "rotateX(180deg)",
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
+          }}
+        />
+
+        {/* --- SIGILLO IN CERALACCA --- */}
+        {/* Contenitore per centrare esattamente (non interferisce con le animazioni) */}
+        <div className="absolute left-1/2 top-1/2 z-40 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+          <motion.div
+            animate={
+              isOpening
+                ? { opacity: 0, scale: 1.1, y: -30, filter: "blur(4px)" }
+                : { opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }
+            }
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="relative flex items-center justify-center h-24 w-24 md:h-32 md:w-32 rounded-full"
+            style={{
+              background: "linear-gradient(135deg, #A83333 0%, #681515 100%)",
+              boxShadow: "inset 0 3px 5px rgba(255,255,255,0.2), inset 0 -4px 6px rgba(0,0,0,0.4), 0 3px 6px rgba(0,0,0,0.3)",
+              border: "1px solid #570E0E"
+            }}
           >
-            <div className="absolute inset-0 border-b border-white/60" style={{ clipPath: 'polygon(0 0, 100% 0, 50% 55%)' }}></div>
-          </div>
-          
-          <div 
-            className="absolute inset-0 bg-[#c7b098]"
-            style={{ clipPath: 'polygon(0 0, 100% 0, 50% 55%)', backfaceVisibility: 'hidden', transform: 'rotateX(180deg)', backgroundImage: paperTexture }}
-          ></div>
+            <div className="absolute inset-[3px] rounded-full border border-[#D44C4C] opacity-40" />
+            <div className="absolute inset-[6px] rounded-full border border-[#4D0B0B] shadow-[inset_0_2px_8px_rgba(0,0,0,0.5)]" />
+            
+            <span className="font-serif italic text-4xl md:text-5xl text-[#F3E6E6] opacity-90 tracking-tighter" style={{ textShadow: "1px 2px 2px rgba(0,0,0,0.6)" }}>
+              K&D
+            </span>
+          </motion.div>
+        </div>
+
+        {/* --- TESTI --- */}
+        <motion.div
+          className="absolute inset-x-0 bottom-[15%] md:bottom-[20%] z-40 text-center pointer-events-none"
+          animate={isOpening ? { opacity: 0 } : { opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          <p className="text-[#6B645A] font-serif text-2xl md:text-3xl italic tracking-wide mb-3">
+            invito di matrimonio
+          </p>
+          <motion.p
+            className="text-[#968C7E] uppercase tracking-[0.25em] text-[10px] md:text-xs font-light mt-4"
+            animate={isOpening ? { opacity: 0 } : { opacity: [0.3, 0.8, 0.3] }}
+            transition={isOpening ? { duration: 0.2 } : { repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
+          >
+            clicca per aprire
+          </motion.p>
         </motion.div>
-
-        {/* Sigillo DORATO */}
-        <AnimatePresence>
-          {!isOpen && (
-            <motion.div 
-              className="absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 md:w-28 md:h-28 z-40 flex items-center justify-center
-                         bg-[radial-gradient(circle_at_35%_35%,#f3d060_0%,#cda036_50%,#876211_100%)]
-                         shadow-[0_10px_15px_rgba(0,0,0,0.4),inset_0_-4px_8px_rgba(0,0,0,0.3)]"
-              style={{ borderRadius: '52% 48% 51% 49% / 51% 49% 52% 48%' }}
-              exit={{ opacity: 0, scale: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div 
-                className="absolute inset-[5px] md:inset-[8px] bg-[radial-gradient(circle_at_50%_50%,#dfb13b_0%,#9a7215_100%)] 
-                           shadow-[inset_0_4px_8px_rgba(0,0,0,0.4),0_1px_1px_rgba(255,255,255,0.4)] flex items-center justify-center border border-black/10"
-                style={{ borderRadius: '50% 51% 49% 50% / 49% 50% 51% 50%' }}
-              >
-                <span 
-                  className="font-serif text-[#ffeeb2] text-xl md:text-3xl italic font-semibold opacity-90 tracking-wide"
-                  style={{ textShadow: '0 -1px 2px rgba(0,0,0,0.4), 0 1px 1px rgba(255,255,255,0.4)' }}
-                >
-                  K&D
-                </span>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <AnimatePresence>
-           {!isOpen && (
-             <motion.p 
-               className="absolute -bottom-16 left-0 right-0 text-center text-stone-400 tracking-[0.4em] text-xs md:text-sm uppercase font-light"
-               exit={{ opacity: 0 }}
-             >
-               Tocca il sigillo per aprire
-             </motion.p>
-           )}
-        </AnimatePresence>
-
-      </div>
+      </button>
     </motion.div>
   );
 }
