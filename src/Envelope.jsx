@@ -89,7 +89,7 @@ export default function Envelope({ onOpen, onPlayMusic }) {
             {TEXT_H1}
           </p>
           <motion.p
-            className="text-[#968C7E] uppercase tracking-[0.25em] text-[10px] md:text-2xl font-light mt-4"
+            className="text-[#968C7E] uppercase tracking-[0.25em] text-2xl md:text-2xl font-light mt-4"
             animate={isOpening ? { opacity: 0 } : { opacity: [0.3, 0.8, 0.3] }}
             transition={isOpening ? { duration: 0.2 } : { repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
           >
