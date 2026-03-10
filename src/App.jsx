@@ -88,12 +88,12 @@ function App() {
               <source src="/video torta.mp4" type="video/mp4" />
             </video>
             
-            {/* VELO BIANCO TOTALE: Copre tutta la torta schiarendo il video al 25% su mobile */}
+            {/* VELO BIANCO TOTALE */}
             <div className="absolute inset-0 bg-white/25 md:bg-white/10 z-10"></div> 
             
             <div className="z-20 flex flex-col items-center w-full px-4">
               
-              {/* RIQUADRO TESTO: rounded-none su desktop (md:rounded-none) */}
+              {/* RIQUADRO TESTO */}
               <div 
                 className="px-6 py-10 md:px-16 md:py-16 bg-[radial-gradient(circle,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0)_80%)] md:bg-stone-100/5 backdrop-blur-[2px] md:backdrop-blur-sm text-stone-800 flex flex-col items-center cursor-default max-w-4xl mx-auto rounded-xl md:rounded-none"
               >
@@ -112,7 +112,13 @@ function App() {
                 </p>
               </div>
               
-              <a href="#rsvp" className="mt-10 border border-stone-400 px-8 py-3 uppercase tracking-widest text-xs bg-white/60 md:bg-stone-100/20 backdrop-blur-sm text-stone-800 font-bold shadow-[0_4px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:bg-stone-800 hover:text-white hover:border-stone-800">
+              {/* PULSANTE RSVP: AGGIORNATO STATO ACTIVE PER MOBILE */}
+              <a 
+                href="#rsvp" 
+                className="mt-10 border border-stone-400 px-8 py-3 uppercase tracking-widest text-xs bg-white/60 md:bg-stone-100/20 backdrop-blur-sm text-stone-800 font-bold shadow-[0_4px_15px_rgba(0,0,0,0.05)] transition-all duration-200 
+                           hover:bg-stone-800 hover:text-white hover:border-stone-800 
+                           active:bg-stone-800 active:text-white active:scale-95"
+              >
                 Conferma Presenza
               </a>
             </div>
@@ -135,7 +141,7 @@ function App() {
           <section className="py-16 bg-[#FAF9F6] text-center px-6">
             <div className="max-w-3xl mx-auto flex flex-col items-center">
               <div className="w-10 h-[1px] bg-stone-400 mb-10"></div>
-              <h2 className="font-serif text-2xl md:text-4xl italic text-stone-700 leading-relaxed px-2">
+              <h2 className="font-serif text-2xl md:text-4xl italic text-stone-700 leading-relaxed px-2 text-center">
                 "Abbiamo deciso di percorrere insieme il viaggio della vita, e non c'è gioia più grande che condividerne l'inizio con le persone che amiamo."
               </h2>
               <div className="w-10 h-[1px] bg-stone-400 mt-10"></div>
@@ -154,8 +160,8 @@ function App() {
                   <p className="text-stone-500 text-sm">Bassano Romano (VT)</p>
                 </div>
                 <div className="flex flex-col gap-4">
-                  <a href="https://share.google/jmGM4mhHfumAxYPBS" target="_blank" rel="noreferrer" className="w-full bg-stone-800 text-white py-3 text-xs uppercase tracking-widest hover:bg-stone-700 transition shadow-md">Apri Mappa</a>
-                  <a href={googleCalendarLink} target="_blank" rel="noreferrer" className="w-full border border-stone-300 text-stone-600 py-3 text-xs uppercase tracking-widest hover:bg-stone-50 transition shadow-sm">Aggiungi al Calendario</a>
+                  <a href="https://share.google/jmGM4mhHfumAxYPBS" target="_blank" rel="noreferrer" className="w-full bg-stone-800 text-white py-3 text-xs uppercase tracking-widest hover:bg-stone-700 active:scale-95 transition shadow-md">Apri Mappa</a>
+                  <a href={googleCalendarLink} target="_blank" rel="noreferrer" className="w-full border border-stone-300 text-stone-600 py-3 text-xs uppercase tracking-widest hover:bg-stone-50 active:scale-95 transition shadow-sm">Aggiungi al Calendario</a>
                 </div>
               </div>
             </div>
@@ -165,7 +171,7 @@ function App() {
           <section className="py-20 bg-[#ebe6df] px-6 text-center">
             <div className="max-w-xl mx-auto">
                <h2 className="font-serif text-3xl italic text-stone-800 mb-6">Un pensiero per noi</h2>
-               <p className="text-stone-600 text-sm mb-10 leading-relaxed italic">"La vostra presenza è per noi il dono più bello. Se tuttavia desiderate farci un pensiero, un contributo sarà gradito."</p>
+               <p className="text-stone-600 text-sm mb-10 leading-relaxed italic">"La vostra presenza è per noi il dono più bello. Se tuttavia desiderate farci un pensiero, un contributo per il nostro viaggio di nozze sarà gradito."</p>
                <div className="bg-white p-8 shadow-sm border border-stone-200">
                   <p className="text-[10px] uppercase tracking-widest text-stone-400 mb-3">IBAN per il nostro viaggio</p>
                   <p className="font-mono text-stone-700 tracking-wider break-all text-sm md:text-base">IT00 0000 0000 0000 0000 0000 000</p>
@@ -174,7 +180,7 @@ function App() {
             </div>
           </section>
 
-          {/* 6. RSVP FORM */}
+          {/* 6. RSVP FORM WHATSAPP */}
           <section id="rsvp" className="py-20 bg-stone-900 text-white px-6 text-center">
             <h2 className="font-serif text-4xl mb-4 italic">Ci sarai?</h2>
             <p className="mb-10 text-stone-400 text-sm">Conferma via WhatsApp entro il 2 Maggio 2026</p>
@@ -203,7 +209,7 @@ function App() {
                 <label className="block text-xs uppercase tracking-widest mb-3 text-stone-400 font-semibold">Allergie o Intolleranze?</label>
                 <textarea name="allergie" rows="2" placeholder="Es. Celiachia, menu vegetariano..." className="w-full p-4 bg-stone-800 border-none text-white rounded-sm outline-none focus:ring-1 focus:ring-white/20 transition"></textarea>
               </div>
-              <button type="submit" className="mt-6 bg-white text-stone-900 py-4 font-bold uppercase tracking-widest text-sm hover:bg-stone-200 active:scale-95 transition shadow-lg">
+              <button type="submit" className="mt-6 w-full bg-white text-stone-900 py-4 font-bold uppercase tracking-widest text-sm hover:bg-stone-200 active:scale-95 transition shadow-lg">
                 Invia Conferma su WhatsApp
               </button>
             </form>
