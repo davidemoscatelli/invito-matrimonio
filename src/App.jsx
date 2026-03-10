@@ -83,36 +83,36 @@ function App() {
         <motion.div className="font-sans text-stone-800 bg-[#FAF9F6] min-h-screen" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           
           {/* 1. HERO SECTION */}
-          <section className="h-[100svh] relative flex flex-col justify-center items-center text-center p-4 overflow-hidden bg-transparent">
+          <section className="h-[100svh] relative flex flex-col justify-center items-center text-center p-4 overflow-hidden bg-white">
             <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover z-0">
               <source src="/video torta.mp4" type="video/mp4" />
             </video>
             
-            <div className="absolute inset-0 bg-black/10 z-10"></div> 
+            {/* VELO BIANCO TOTALE: Copre tutta la torta schiarendo il video al 25% su mobile */}
+            <div className="absolute inset-0 bg-white/25 md:bg-white/10 z-10"></div> 
             
             <div className="z-20 flex flex-col items-center w-full px-4">
               
-              {/* RIQUADRO TESTO: Statico, senza hover colorato */}
+              {/* RIQUADRO TESTO: rounded-none su desktop (md:rounded-none) */}
               <div 
-                className="px-8 py-12 md:px-16 md:py-16 bg-[radial-gradient(circle,rgba(255,255,255,0.4)_0%,rgba(255,255,255,0)_70%)] md:bg-stone-100/10 backdrop-blur-none md:backdrop-blur-sm text-stone-800 flex flex-col items-center cursor-default max-w-4xl mx-auto rounded-sm"
+                className="px-6 py-10 md:px-16 md:py-16 bg-[radial-gradient(circle,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0)_80%)] md:bg-stone-100/5 backdrop-blur-[2px] md:backdrop-blur-sm text-stone-800 flex flex-col items-center cursor-default max-w-4xl mx-auto rounded-xl md:rounded-none"
               >
-                <p className="tracking-[0.2em] uppercase mb-4 text-xs font-semibold drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">
+                <p className="tracking-[0.2em] uppercase mb-4 text-[10px] md:text-xs font-bold drop-shadow-[0_0_10px_rgba(255,255,255,1)]">
                   Siete invitati al matrimonio di
                 </p>
                 
-                <h1 className="font-serif text-5xl md:text-8xl mb-6 italic leading-tight flex flex-col md:flex-row items-center gap-2 md:gap-6 drop-shadow-[0_0_15px_rgba(255,255,255,0.9)]">
+                <h1 className="font-serif text-5xl md:text-8xl mb-6 italic leading-tight flex flex-col md:flex-row items-center gap-2 md:gap-6 drop-shadow-[0_0_30px_rgba(255,255,255,1)]">
                   <span>Krizia</span>
                   <span className="text-3xl md:text-7xl opacity-80">&</span>
                   <span>Davide</span>
                 </h1>
                 
-                <p className="text-lg md:text-2xl font-semibold tracking-widest drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">
+                <p className="text-lg md:text-2xl font-semibold tracking-widest drop-shadow-[0_0_10px_rgba(255,255,255,1)]">
                   2 Giugno 2026
                 </p>
               </div>
               
-              {/* PULSANTE: Ripristinato HOVER */}
-              <a href="#rsvp" className="mt-10 border border-stone-400 px-8 py-3 uppercase tracking-widest text-xs bg-white/40 md:bg-stone-100/20 backdrop-blur-sm text-stone-800 font-semibold shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all duration-300 hover:bg-stone-800 hover:text-white hover:border-stone-800">
+              <a href="#rsvp" className="mt-10 border border-stone-400 px-8 py-3 uppercase tracking-widest text-xs bg-white/60 md:bg-stone-100/20 backdrop-blur-sm text-stone-800 font-bold shadow-[0_4px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:bg-stone-800 hover:text-white hover:border-stone-800">
                 Conferma Presenza
               </a>
             </div>
@@ -143,7 +143,7 @@ function App() {
           </section>
 
           {/* 4. DETTAGLI EVENTO */}
-          <section className="py-16 bg-white px-4">
+          <section className="py-16 bg-white px-4 border-t border-stone-100">
             <div className="max-w-xl mx-auto text-center">
               <div className="p-8 bg-[#FAF9F6] shadow-xl border border-stone-100 rounded-sm relative overflow-hidden">
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-[#d5c5b3]"></div>
@@ -154,8 +154,8 @@ function App() {
                   <p className="text-stone-500 text-sm">Bassano Romano (VT)</p>
                 </div>
                 <div className="flex flex-col gap-4">
-                  <a href="https://share.google/jmGM4mhHfumAxYPBS" target="_blank" rel="noreferrer" className="w-full bg-stone-800 text-white py-3 text-xs uppercase tracking-widest hover:bg-stone-700 transition">Apri Mappa</a>
-                  <a href={googleCalendarLink} target="_blank" rel="noreferrer" className="w-full border border-stone-300 text-stone-600 py-3 text-xs uppercase tracking-widest hover:bg-stone-50 transition">Aggiungi al Calendario</a>
+                  <a href="https://share.google/jmGM4mhHfumAxYPBS" target="_blank" rel="noreferrer" className="w-full bg-stone-800 text-white py-3 text-xs uppercase tracking-widest hover:bg-stone-700 transition shadow-md">Apri Mappa</a>
+                  <a href={googleCalendarLink} target="_blank" rel="noreferrer" className="w-full border border-stone-300 text-stone-600 py-3 text-xs uppercase tracking-widest hover:bg-stone-50 transition shadow-sm">Aggiungi al Calendario</a>
                 </div>
               </div>
             </div>
@@ -165,10 +165,10 @@ function App() {
           <section className="py-20 bg-[#ebe6df] px-6 text-center">
             <div className="max-w-xl mx-auto">
                <h2 className="font-serif text-3xl italic text-stone-800 mb-6">Un pensiero per noi</h2>
-               <p className="text-stone-600 text-sm mb-10 leading-relaxed">Se desiderate farci un regalo, un contributo per il nostro viaggio di nozze sarà gradito.</p>
+               <p className="text-stone-600 text-sm mb-10 leading-relaxed italic">"La vostra presenza è per noi il dono più bello. Se tuttavia desiderate farci un pensiero, un contributo per il nostro viaggio di nozze sarà gradito."</p>
                <div className="bg-white p-8 shadow-sm border border-stone-200">
-                  <p className="text-xs uppercase text-stone-400 mb-3">IBAN per il viaggio</p>
-                  <p className="font-mono text-stone-700 tracking-wider break-all">IT00 0000 0000 0000 0000 0000 000</p>
+                  <p className="text-[10px] uppercase tracking-widest text-stone-400 mb-3">IBAN per il nostro viaggio</p>
+                  <p className="font-mono text-stone-700 tracking-wider break-all text-sm md:text-base">IT00 0000 0000 0000 0000 0000 000</p>
                   <p className="text-xs text-stone-400 mt-2 italic">Intestato a Krizia e Davide</p>
                </div>
             </div>
@@ -181,29 +181,29 @@ function App() {
             
             <form onSubmit={handleRSVP} className="max-w-md mx-auto flex flex-col gap-6 text-left">
               <div>
-                <label className="block text-xs uppercase tracking-widest mb-3 text-stone-400">Nome e Cognome</label>
-                <input type="text" name="nome" required className="w-full p-4 bg-stone-800 border-none text-white rounded-sm focus:ring-1 focus:ring-white/20 outline-none" />
+                <label className="block text-xs uppercase tracking-widest mb-3 text-stone-400 font-semibold">Nome e Cognome</label>
+                <input type="text" name="nome" required className="w-full p-4 bg-stone-800 border-none text-white rounded-sm focus:ring-1 focus:ring-white/20 outline-none transition" />
               </div>
               
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="flex-1">
-                  <label className="block text-xs uppercase tracking-widest mb-3 text-stone-400">Parteciperai?</label>
-                  <select name="presenza" className="w-full p-4 bg-stone-800 border-none text-white rounded-sm appearance-none outline-none">
+                  <label className="block text-xs uppercase tracking-widest mb-3 text-stone-400 font-semibold">Parteciperai?</label>
+                  <select name="presenza" className="w-full p-4 bg-stone-800 border-none text-white rounded-sm appearance-none outline-none focus:ring-1 focus:ring-white/20 transition">
                     <option value="Sì, non vedo l'ora!">Sì, non vedo l'ora!</option>
                     <option value="Purtroppo non potrò esserci">Purtroppo non potrò esserci</option>
                   </select>
                 </div>
                 <div className="md:w-32">
-                  <label className="block text-xs uppercase tracking-widest mb-3 text-stone-400">In quanti?</label>
-                  <input type="number" name="numeroPersone" min="1" max="10" defaultValue="1" required className="w-full p-4 bg-stone-800 border-none text-white rounded-sm outline-none" />
+                  <label className="block text-xs uppercase tracking-widest mb-3 text-stone-400 font-semibold">In quanti?</label>
+                  <input type="number" name="numeroPersone" min="1" max="10" defaultValue="1" required className="w-full p-4 bg-stone-800 border-none text-white rounded-sm outline-none focus:ring-1 focus:ring-white/20 transition" />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs uppercase tracking-widest mb-3 text-stone-400">Allergie o Intolleranze?</label>
-                <textarea name="allergie" rows="2" placeholder="Es. Celiachia, menu vegetariano..." className="w-full p-4 bg-stone-800 border-none text-white rounded-sm outline-none"></textarea>
+                <label className="block text-xs uppercase tracking-widest mb-3 text-stone-400 font-semibold">Allergie o Intolleranze?</label>
+                <textarea name="allergie" rows="2" placeholder="Es. Celiachia, menu vegetariano..." className="w-full p-4 bg-stone-800 border-none text-white rounded-sm outline-none focus:ring-1 focus:ring-white/20 transition"></textarea>
               </div>
-              <button type="submit" className="mt-6 bg-white text-stone-900 py-4 font-semibold uppercase tracking-widest text-sm hover:bg-stone-200 transition shadow-lg">
+              <button type="submit" className="mt-6 bg-white text-stone-900 py-4 font-bold uppercase tracking-widest text-sm hover:bg-stone-200 active:scale-95 transition shadow-lg">
                 Invia Conferma su WhatsApp
               </button>
             </form>
