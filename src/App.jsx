@@ -98,7 +98,7 @@ function App() {
                 className="px-6 py-10 md:px-16 md:py-16 bg-[radial-gradient(circle,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0)_80%)] md:bg-stone-100/5 backdrop-blur-[2px] md:backdrop-blur-sm text-stone-800 flex flex-col items-center cursor-default max-w-4xl mx-auto rounded-xl md:rounded-none"
               >
                 <p className="tracking-[0.2em] uppercase mb-4 text-[10px] md:text-xs font-bold drop-shadow-[0_0_10px_rgba(255,255,255,1)]">
-                  Siete invitati al matrimonio di
+                  Siete invitati al nostro matrimonio
                 </p>
                 
                 <h1 className="font-serif text-5xl md:text-8xl mb-6 italic leading-tight flex flex-col md:flex-row items-center gap-2 md:gap-6 drop-shadow-[0_0_30px_rgba(255,255,255,1)]">
