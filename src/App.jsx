@@ -165,7 +165,7 @@ function App() {
           <section className="py-20 bg-[#ebe6df] px-6 text-center">
             <div className="max-w-xl mx-auto">
                <h2 className="font-serif text-3xl italic text-stone-800 mb-6">Un pensiero per noi</h2>
-               <p className="text-stone-600 text-sm mb-10 leading-relaxed italic">"La vostra presenza è per noi il dono più bello. Se tuttavia desiderate farci un pensiero, un contributo per il nostro viaggio di nozze sarà gradito."</p>
+               <p className="text-stone-600 text-sm mb-10 leading-relaxed italic">"La vostra presenza è per noi il dono più bello. Se tuttavia desiderate farci un pensiero, un contributo sarà gradito."</p>
                <div className="bg-white p-8 shadow-sm border border-stone-200">
                   <p className="text-[10px] uppercase tracking-widest text-stone-400 mb-3">IBAN per il nostro viaggio</p>
                   <p className="font-mono text-stone-700 tracking-wider break-all text-sm md:text-base">IT00 0000 0000 0000 0000 0000 000</p>
