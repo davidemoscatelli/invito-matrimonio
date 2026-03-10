@@ -87,7 +87,8 @@ function App() {
           {/* 1. HERO SECTION */}
           <section className="h-[100svh] relative flex flex-col justify-center items-center text-center p-4 overflow-hidden bg-stone-900">
             <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover z-0 opacity-80">
-              <source src="/12423708_1920_1080_25fps.mp4" type="video/mp4" />
+              {/* Sostituito il video qui sotto */}
+              <source src="/video torta.mp4" type="video/mp4" />
             </video>
             <div className="absolute inset-0 bg-black/40 z-10"></div> 
             <div className="z-20 text-white flex flex-col items-center w-full px-4">
