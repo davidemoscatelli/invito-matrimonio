@@ -81,7 +81,7 @@ export default function Envelope({ onOpen, onPlayMusic }) {
         {/* --- Testi Sovrapposti --- */}
         {/* Ho modificato translate-y per spingere il testo più in basso ed evitare il sigillo */}
         <motion.div
-          className="absolute left-1/2 top-1/2 z-40 w-full -translate-x-1/2 translate-y-48 md:translate-y-95 text-center pointer-events-none px-4"
+          className="absolute left-1/2 top-1/2 z-40 w-full -translate-x-1/2 translate-y-48 md:translate-y-120 text-center pointer-events-none px-4"
           animate={isOpening ? { opacity: 0, scale: 0.9 } : { opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >

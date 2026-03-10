@@ -30,6 +30,7 @@ function App() {
     return () => clearInterval(interval);
   }, [targetDate]);
 
+  // FUNZIONE INVIO RSVP VIA WHATSAPP AGGIORNATA
   const handleRSVP = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -40,6 +41,7 @@ function App() {
 
     const numeroWhatsApp = "393342081262"; 
     
+    // Messaggio formattato come richiesto
     const messaggio = `Ciao Krizia e Davide! %0A%0A` + 
                       `Sono *${nome}* %0A` + 
                       `👉 *${presenza}* %0A` + 
@@ -74,7 +76,7 @@ function App() {
       )}
 
       {isSiteVisible && isMusicPlaying && (
-        <button onClick={toggleMute} className="fixed bottom-6 right-6 z-50 p-4 bg-stone-800/70 text-white rounded-full shadow-lg backdrop-blur-md border border-stone-200">
+        <button onClick={toggleMute} className="fixed bottom-6 right-6 z-50 p-4 bg-stone-900/40 text-white rounded-full shadow-lg backdrop-blur-md border border-white/20">
           {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
         </button>
       )}
@@ -83,24 +85,19 @@ function App() {
         <motion.div className="font-sans text-stone-800 bg-[#FAF9F6] min-h-screen" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           
           {/* 1. HERO SECTION */}
-          <section className="h-[100svh] relative flex flex-col justify-center items-center text-center p-4 overflow-hidden bg-transparent">
-            <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover z-0">
+          <section className="h-[100svh] relative flex flex-col justify-center items-center text-center p-4 overflow-hidden bg-stone-900">
+            <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover z-0 opacity-80">
+              {/* Sostituito il video qui sotto */}
               <source src="/video torta.mp4" type="video/mp4" />
             </video>
-            
-            <div className="z-20 flex flex-col items-center w-full px-4">
-              
-              {/* RIQUADRO: Effetto blur attivato solo su PC (md:backdrop-blur-sm) */}
-              <div className="border border-stone-400 px-8 py-12 md:px-16 md:py-16 bg-transparent md:bg-stone-100/10 backdrop-blur-none md:backdrop-blur-sm hover:bg-stone-800 transition duration-500 text-stone-600 hover:text-white flex flex-col items-center cursor-default max-w-4xl mx-auto rounded-sm">
-                <p className="tracking-[0.2em] uppercase mb-4 text-xs font-light">Siete invitati al matrimonio di</p>
-                <h1 className="font-serif text-5xl md:text-8xl mb-6 italic leading-tight flex flex-col md:flex-row items-center gap-2 md:gap-6">
-                  <span>Krizia</span><span className="text-3xl md:text-7xl opacity-80">&</span><span>Davide</span>
-                </h1>
-                <p className="text-lg md:text-2xl font-light tracking-widest">2 Giugno 2026</p>
-              </div>
-              
-              {/* PULSANTE: Ho applicato la stessa logica per coerenza (blur solo su PC) */}
-              <a href="#rsvp" className="mt-10 border border-stone-400 px-8 py-3 uppercase tracking-widest text-xs bg-transparent md:bg-stone-100/10 backdrop-blur-none md:backdrop-blur-sm hover:bg-stone-800 hover:text-white transition duration-300">
+            <div className="absolute inset-0 bg-black/10 z-10"></div> 
+            <div className="z-20 text-white flex flex-col items-center w-full px-4">
+              <p className="tracking-[0.2em] uppercase mb-4 text-xs font-light">Siete invitati al matrimonio di</p>
+              <h1 className="font-serif text-5xl md:text-8xl mb-6 italic drop-shadow-lg leading-tight flex flex-col md:flex-row items-center gap-2 md:gap-6">
+                <span>Krizia</span><span className="text-3xl md:text-7xl opacity-80">&</span><span>Davide</span>
+              </h1>
+              <p className="text-lg md:text-2xl font-light tracking-widest">2 Giugno 2026</p>
+              <a href="#rsvp" className="mt-16 border border-white px-8 py-3 uppercase tracking-widest text-xs backdrop-blur-sm bg-white/10 hover:bg-white hover:text-stone-900 transition duration-300">
                 Conferma Presenza
               </a>
             </div>
@@ -142,8 +139,8 @@ function App() {
                   <p className="text-stone-500 text-sm">Bassano Romano (VT)</p>
                 </div>
                 <div className="flex flex-col gap-4">
-                  <a href="https://share.google/jmGM4mhHfumAxYPBS" target="_blank" rel="noreferrer" className="w-full bg-stone-800 text-white py-3 text-xs uppercase tracking-widest">Apri Mappa</a>
-                  <a href={googleCalendarLink} target="_blank" rel="noreferrer" className="w-full border border-stone-300 text-stone-600 py-3 text-xs uppercase tracking-widest">Aggiungi al Calendario</a>
+                  <a href="https://share.google/jmGM4mhHfumAxYPBS" target="_blank" className="w-full bg-stone-800 text-white py-3 text-xs uppercase tracking-widest">Apri Mappa</a>
+                  <a href={googleCalendarLink} target="_blank" className="w-full border border-stone-300 text-stone-600 py-3 text-xs uppercase tracking-widest">Aggiungi al Calendario</a>
                 </div>
               </div>
             </div>
