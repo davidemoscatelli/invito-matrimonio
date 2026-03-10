@@ -9,7 +9,7 @@ const IMAGE_CLOSED_URL = "/image_closed.PNG"; // Sostituisci con il vero percors
 const IMAGE_OPEN_URL = "/image_open.PNG"; // Sostituisci con il vero percorso
 
 // --- Configurazione Testo ---
-const TEXT_H1 = "invito di matrimonio";
+const TEXT_H1 = "Invito di matrimonio";
 const TEXT_H2 = "CLICCA PER APRIRE";
 
 // Durata totale dell'animazione prima di passare alla landing page

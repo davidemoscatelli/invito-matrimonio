@@ -90,8 +90,8 @@ function App() {
             
             <div className="z-20 flex flex-col items-center w-full px-4">
               
-              {/* NUOVO RIQUADRO PER IL TESTO CON EFFETTO HOVER/GLASS */}
-              <div className="border border-stone-400 px-8 py-12 md:px-16 md:py-16 backdrop-blur-sm bg-stone-100/10 hover:bg-stone-800 transition duration-500 text-stone-600 hover:text-white flex flex-col items-center cursor-default max-w-4xl mx-auto rounded-sm">
+              {/* RIQUADRO: Effetto blur attivato solo su PC (md:backdrop-blur-sm) */}
+              <div className="border border-stone-400 px-8 py-12 md:px-16 md:py-16 bg-transparent md:bg-stone-100/10 backdrop-blur-none md:backdrop-blur-sm hover:bg-stone-800 transition duration-500 text-stone-600 hover:text-white flex flex-col items-center cursor-default max-w-4xl mx-auto rounded-sm">
                 <p className="tracking-[0.2em] uppercase mb-4 text-xs font-light">Siete invitati al matrimonio di</p>
                 <h1 className="font-serif text-5xl md:text-8xl mb-6 italic leading-tight flex flex-col md:flex-row items-center gap-2 md:gap-6">
                   <span>Krizia</span><span className="text-3xl md:text-7xl opacity-80">&</span><span>Davide</span>
@@ -99,7 +99,8 @@ function App() {
                 <p className="text-lg md:text-2xl font-light tracking-widest">2 Giugno 2026</p>
               </div>
               
-              <a href="#rsvp" className="mt-10 border border-stone-400 px-8 py-3 uppercase tracking-widest text-xs backdrop-blur-sm bg-stone-100/10 hover:bg-stone-800 hover:text-white transition duration-300">
+              {/* PULSANTE: Ho applicato la stessa logica per coerenza (blur solo su PC) */}
+              <a href="#rsvp" className="mt-10 border border-stone-400 px-8 py-3 uppercase tracking-widest text-xs bg-transparent md:bg-stone-100/10 backdrop-blur-none md:backdrop-blur-sm hover:bg-stone-800 hover:text-white transition duration-300">
                 Conferma Presenza
               </a>
             </div>
