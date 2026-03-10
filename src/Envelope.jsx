@@ -31,7 +31,7 @@ export default function Envelope({ onOpen, onPlayMusic }) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 overflow-hidden bg-[#E4DCCB]" // Sfondo scuro per sicurezza
+      className="fixed inset-0 z-50 overflow-hidden bg-[#E4DCCB]"
       initial={{ opacity: 1 }}
       animate={isOpening ? { opacity: 0, filter: "blur(5px)" } : { opacity: 1, filter: "blur(0px)" }}
       transition={{ duration: 0.8, delay: 0.6, ease: "easeInOut" }}
@@ -41,7 +41,8 @@ export default function Envelope({ onOpen, onPlayMusic }) {
         onClick={handleOpen}
         disabled={isOpening}
         aria-label="Apri l'invito"
-        className="relative block h-screen w-screen cursor-pointer outline-none overflow-hidden"
+        // Modificato h-screen in h-[100dvh] per risolvere i problemi su mobile
+        className="relative block h-[100dvh] w-screen cursor-pointer outline-none overflow-hidden"
         style={{ perspective: "1500px" }}
       >
         {/* INTERNO SCURO (Visibile solo quando l'aletta si alza) */}
@@ -75,7 +76,6 @@ export default function Envelope({ onOpen, onPlayMusic }) {
             clipPath: "polygon(0 100%, 50% 50%, 100% 100%)",
             backgroundColor: "#F2ECE0",
             backgroundImage: paperTexture,
-            // L'ombra applicata direttamente qui assicura che le linee si vedano
             filter: "drop-shadow(0px -6px 15px rgba(0,0,0,0.12))",
             WebkitFilter: "drop-shadow(0px -6px 15px rgba(0,0,0,0.12))"
           }}
@@ -91,7 +91,6 @@ export default function Envelope({ onOpen, onPlayMusic }) {
             clipPath: "polygon(0 0, 100% 0, 50% 50%)",
             backgroundColor: "#FDFBF8",
             backgroundImage: paperTexture,
-            // Cambia l'ombra mentre si apre
             filter: isOpening 
               ? "drop-shadow(0px 20px 20px rgba(0,0,0,0.3))" 
               : "drop-shadow(0px 6px 15px rgba(0,0,0,0.15))",
@@ -104,7 +103,7 @@ export default function Envelope({ onOpen, onPlayMusic }) {
           }}
         />
 
-        {/* RETRO DELL'ALETTA SUPERIORE (Colore più scuro per dare profondità quando ruota in su) */}
+        {/* RETRO DELL'ALETTA SUPERIORE */}
         <motion.div
           className="absolute inset-0 z-25 origin-top pointer-events-none"
           initial={{ rotateX: 0, opacity: 0 }}
@@ -121,7 +120,6 @@ export default function Envelope({ onOpen, onPlayMusic }) {
         />
 
         {/* --- SIGILLO IN CERALACCA --- */}
-        {/* Contenitore per centrare esattamente (non interferisce con le animazioni) */}
         <div className="absolute left-1/2 top-1/2 z-40 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
           <motion.div
             animate={
@@ -140,23 +138,31 @@ export default function Envelope({ onOpen, onPlayMusic }) {
             <div className="absolute inset-[3px] rounded-full border border-[#D44C4C] opacity-40" />
             <div className="absolute inset-[6px] rounded-full border border-[#4D0B0B] shadow-[inset_0_2px_8px_rgba(0,0,0,0.5)]" />
             
-            <span className="font-serif italic text-4xl md:text-5xl text-[#F3E6E6] opacity-90 tracking-tighter" style={{ textShadow: "1px 2px 2px rgba(0,0,0,0.6)" }}>
-              K&D
-            </span>
+            <div 
+                className="flex items-center justify-center font-serif italic text-[#F3E6E6] opacity-90 tracking-tighter" 
+                style={{ textShadow: "1px 2px 2px rgba(0,0,0,0.6)" }}
+              >
+                <span className="text-4xl md:text-5xl">K</span>
+                {/* La & resa più piccola e leggera */}
+                <span className="text-2xl md:text-3xl mx-1 opacity-80 font-light">&</span>
+                <span className="text-4xl md:text-5xl">D</span>
+              </div>
           </motion.div>
         </div>
 
         {/* --- TESTI --- */}
         <motion.div
-          className="absolute inset-x-0 bottom-[15%] md:bottom-[20%] z-40 text-center pointer-events-none"
+          // Ancorato al centro (top-1/2) e traslato verso il basso.
+          // In questo modo resta sempre attaccato al timbro indipendentemente dall'altezza del telefono.
+          className="absolute inset-x-0 top-1/2 z-40 text-center pointer-events-none translate-y-[4.5rem] md:translate-y-[6rem]"
           animate={isOpening ? { opacity: 0 } : { opacity: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <p className="text-[#6B645A] font-serif text-2xl md:text-3xl italic tracking-wide mb-3">
+          <p className="text-[#6B645A] font-serif text-2xl md:text-3xl italic tracking-wide mb-2 md:mb-3">
             invito di matrimonio
           </p>
           <motion.p
-            className="text-[#968C7E] uppercase tracking-[0.25em] text-[10px] md:text-xs font-light mt-4"
+            className="text-[#968C7E] uppercase tracking-[0.25em] text-[10px] md:text-xs font-light mt-2 md:mt-3"
             animate={isOpening ? { opacity: 0 } : { opacity: [0.3, 0.8, 0.3] }}
             transition={isOpening ? { duration: 0.2 } : { repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
           >
