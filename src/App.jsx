@@ -84,7 +84,8 @@ function App() {
           
           {/* 1. HERO SECTION */}
           <section className="h-[100svh] relative flex flex-col justify-center items-center text-center p-4 overflow-hidden bg-white">
-            <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover z-0">
+            {/* INGRANDITO IL VIDEO SU MOBILE: scale-[1.6] zooma il video solo sui telefoni */}
+            <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover z-0 scale-[1.6] md:scale-100 origin-center">
               <source src="/video torta.mp4" type="video/mp4" />
             </video>
             
@@ -92,31 +93,29 @@ function App() {
             
             <div className="z-20 flex flex-col items-center w-full max-w-lg md:max-w-4xl px-2 md:px-4">
               
-              {/* RIQUADRO TESTO: Angoli squadrati (rounded-none) sia su mobile che su pc */}
+              {/* RIMOSSO IL "MURO BIANCO": Solo un alone sfumato (radial-gradient) su mobile */}
               <div 
-                className="w-full px-4 py-10 md:px-16 md:py-16 
-                           bg-white/40 md:bg-[radial-gradient(circle,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0)_80%)] 
-                           backdrop-blur-md md:backdrop-blur-sm 
-                           border border-white/50 md:border-none 
-                           shadow-[0_8px_30px_rgba(0,0,0,0.06)] md:shadow-none 
-                           text-stone-800 flex flex-col items-center cursor-default rounded-none"
+                className="w-full px-2 py-8 md:px-16 md:py-16 
+                           bg-[radial-gradient(circle,rgba(255,255,255,0.7)_20%,rgba(255,255,255,0)_75%)] md:bg-[radial-gradient(circle,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0)_80%)] 
+                           backdrop-blur-[2px] md:backdrop-blur-sm 
+                           text-stone-800 flex flex-col items-center cursor-default"
               >
-                <p className="font-sans tracking-[0.15em] uppercase mb-4 text-xs md:text-sm font-bold text-stone-700">
-                  Vi invitiamo, insieme alle vostre famiglie,<br className="md:hidden" /> al nostro matrimonio
+                {/* Aggiunto un drop-shadow bianco ai testi per farli staccare dal disegno della torta */}
+                <p className="font-sans tracking-[0.15em] uppercase mb-4 text-xs md:text-sm font-bold text-stone-700 drop-shadow-[0_0_8px_rgba(255,255,255,1)]">
+                  Vi invitiamo, insieme a partner e figli,<br className="md:hidden" /> al nostro matrimonio
                 </p>
                 
-                <h1 className="font-serif text-6xl md:text-8xl mb-6 italic leading-tight flex flex-col md:flex-row items-center gap-1 md:gap-6 drop-shadow-sm">
+                <h1 className="font-serif text-6xl md:text-8xl mb-6 italic leading-tight flex flex-col md:flex-row items-center gap-1 md:gap-6 drop-shadow-[0_0_15px_rgba(255,255,255,1)]">
                   <span>Krizia</span>
                   <span className="font-sans text-4xl md:text-7xl opacity-60 font-light">&</span>
                   <span>Davide</span>
                 </h1>
                 
-                <p className="font-sans text-xl md:text-2xl font-bold tracking-widest">
+                <p className="font-sans text-xl md:text-2xl font-bold tracking-widest drop-shadow-[0_0_8px_rgba(255,255,255,1)]">
                   2 Giugno 2026
                 </p>
               </div>
               
-              {/* PULSANTE RSVP: Angoli squadrati (rounded-none) */}
               <a 
                 href="#rsvp" 
                 className="font-sans mt-8 md:mt-10 border border-stone-400 px-8 py-4 uppercase tracking-widest text-xs md:text-sm bg-white/70 md:bg-stone-100/20 backdrop-blur-md text-stone-800 font-bold shadow-lg transition-all duration-200 hover:bg-stone-800 hover:text-white hover:border-stone-800 active:bg-stone-800 active:text-white active:scale-95 rounded-none"
@@ -208,8 +207,8 @@ function App() {
           <section id="rsvp" className="py-20 bg-stone-900 text-white px-6 text-center">
             <h2 className="font-serif text-4xl md:text-5xl mb-4 italic">Ci sarai?</h2>
             <p className="font-sans mb-10 text-stone-300 text-sm md:text-base tracking-wide leading-relaxed">
-              L'invito è esteso a compagni e figli.<br className="hidden md:block"/>
-              Conferma per tutti via WhatsApp entro il <span className="font-bold text-white">2 Maggio 2026</span>.
+              L'invito è esteso a partner e figli.<br className="hidden md:block"/>
+              Confermate la presenza via WhatsApp entro il <span className="font-bold text-white">2 Maggio 2026</span>.
             </p>
             
             <form onSubmit={handleRSVP} className="font-sans max-w-md mx-auto flex flex-col gap-6 text-left">
