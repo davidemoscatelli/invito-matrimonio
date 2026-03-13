@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Volume2, VolumeX } from 'lucide-react'; 
+import { Volume2, VolumeX, ChevronDown } from 'lucide-react'; 
 import Envelope from './Envelope';
 
 function App() {
@@ -84,7 +84,7 @@ function App() {
           
           {/* 1. HERO SECTION */}
           <section className="h-[100svh] relative flex flex-col justify-center items-center text-center p-4 overflow-hidden bg-white">
-            {/* INGRANDITO IL VIDEO SU MOBILE: scale-[1.6] zooma il video solo sui telefoni */}
+            
             <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover z-0 scale-[1.6] md:scale-100 origin-center">
               <source src="/video torta.mp4" type="video/mp4" />
             </video>
@@ -93,14 +93,12 @@ function App() {
             
             <div className="z-20 flex flex-col items-center w-full max-w-lg md:max-w-4xl px-2 md:px-4">
               
-              {/* RIMOSSO IL "MURO BIANCO": Solo un alone sfumato (radial-gradient) su mobile */}
               <div 
                 className="w-full px-2 py-8 md:px-16 md:py-16 
                            bg-[radial-gradient(circle,rgba(255,255,255,0.7)_20%,rgba(255,255,255,0)_75%)] md:bg-[radial-gradient(circle,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0)_80%)] 
                            backdrop-blur-[2px] md:backdrop-blur-sm 
                            text-stone-800 flex flex-col items-center cursor-default"
               >
-                {/* Aggiunto un drop-shadow bianco ai testi per farli staccare dal disegno della torta */}
                 <p className="font-sans tracking-[0.15em] uppercase mb-4 text-xs md:text-sm font-bold text-stone-700 drop-shadow-[0_0_8px_rgba(255,255,255,1)]">
                   Vi invitiamo, insieme a partner e figli,<br className="md:hidden" /> al nostro matrimonio
                 </p>
@@ -123,6 +121,25 @@ function App() {
                 Conferma Presenza
               </a>
             </div>
+
+            {/* INDICATORE DI SCORRIMENTO */}
+            <motion.div 
+              className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1 text-stone-700 opacity-90"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 2, duration: 1 }} 
+            >
+              <p className="font-sans text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold drop-shadow-[0_0_8px_rgba(255,255,255,1)]">
+                Scorri per maggiori informazioni
+              </p>
+              <motion.div
+                animate={{ y: [0, 6, 0] }} 
+                transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+              >
+                <ChevronDown size={20} className="drop-shadow-[0_0_8px_rgba(255,255,255,1)]" />
+              </motion.div>
+            </motion.div>
+
           </section>
 
           {/* 2. COUNTDOWN */}
@@ -226,7 +243,7 @@ function App() {
                   </select>
                 </div>
                 <div className="md:w-32">
-                  <label className="block text-xs uppercase tracking-widest mb-3 text-stone-400 font-semibold">In quanti?</label>
+                  <label className="block text-xs uppercase tracking-widest mb-3 text-stone-400 font-semibold">Numero partecipanti</label>
                   <input type="number" name="numeroPersone" min="1" max="10" defaultValue="1" required className="w-full p-4 bg-stone-800 border-none text-white rounded-sm outline-none focus:ring-1 focus:ring-white/40 transition" />
                 </div>
               </div>
