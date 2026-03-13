@@ -201,7 +201,7 @@ function App() {
           <section className="py-20 bg-[#ebe6df] px-6 text-center">
             <div className="max-w-xl mx-auto">
                <h2 className="font-serif text-3xl md:text-4xl italic text-stone-800 mb-6">Un pensiero per noi</h2>
-               <p className="font-serif text-stone-600 text-base md:text-lg mb-10 leading-relaxed italic">"La vostra presenza è per noi il dono più bello. Tuttavia se desiderate farci un pensiero, sotto trovate le indicazioni"</p>
+               <p className="font-serif text-stone-600 text-base md:text-lg mb-10 leading-relaxed italic">"La vostra presenza è per noi il dono più bello. Tuttavia se desiderate farci un pensiero, qui sotto trovate le indicazioni"</p>
                <div className="bg-white p-8 md:p-10 shadow-sm border border-stone-200 rounded-sm">
                   <p className="font-sans text-xs uppercase tracking-widest text-stone-400 mb-3 font-semibold">Coordinate Bancarie</p>
                   <p className="font-mono text-stone-700 tracking-wider break-all text-sm md:text-lg mb-6 font-medium">IT46 Y032 6822 3000 5242 2747 860</p>
