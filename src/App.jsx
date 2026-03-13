@@ -88,36 +88,38 @@ function App() {
               <source src="/video torta.mp4" type="video/mp4" />
             </video>
             
-            {/* VELO BIANCO TOTALE */}
-            <div className="absolute inset-0 bg-white/25 md:bg-white/10 z-10"></div> 
+            <div className="absolute inset-0 bg-white/10 z-10"></div> 
             
-            <div className="z-20 flex flex-col items-center w-full px-4">
+            <div className="z-20 flex flex-col items-center w-full max-w-lg md:max-w-4xl px-2 md:px-4">
               
-              {/* RIQUADRO TESTO */}
+              {/* RIQUADRO TESTO: Angoli squadrati (rounded-none) sia su mobile che su pc */}
               <div 
-                className="px-6 py-10 md:px-16 md:py-16 bg-[radial-gradient(circle,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0)_80%)] md:bg-stone-100/5 backdrop-blur-[2px] md:backdrop-blur-sm text-stone-800 flex flex-col items-center cursor-default max-w-4xl mx-auto rounded-xl md:rounded-none"
+                className="w-full px-4 py-10 md:px-16 md:py-16 
+                           bg-white/40 md:bg-[radial-gradient(circle,rgba(255,255,255,0.7)_0%,rgba(255,255,255,0)_80%)] 
+                           backdrop-blur-md md:backdrop-blur-sm 
+                           border border-white/50 md:border-none 
+                           shadow-[0_8px_30px_rgba(0,0,0,0.06)] md:shadow-none 
+                           text-stone-800 flex flex-col items-center cursor-default rounded-none"
               >
-                <p className="tracking-[0.2em] uppercase mb-4 text-[10px] md:text-xs font-bold drop-shadow-[0_0_10px_rgba(255,255,255,1)]">
-                  Siete invitati al nostro matrimonio
+                <p className="font-sans tracking-[0.15em] uppercase mb-4 text-xs md:text-sm font-bold text-stone-700">
+                  Vi invitiamo, insieme alle vostre famiglie,<br className="md:hidden" /> al nostro matrimonio
                 </p>
                 
-                <h1 className="font-serif text-5xl md:text-8xl mb-6 italic leading-tight flex flex-col md:flex-row items-center gap-2 md:gap-6 drop-shadow-[0_0_30px_rgba(255,255,255,1)]">
+                <h1 className="font-serif text-6xl md:text-8xl mb-6 italic leading-tight flex flex-col md:flex-row items-center gap-1 md:gap-6 drop-shadow-sm">
                   <span>Krizia</span>
-                  <span className="text-3xl md:text-7xl opacity-80">&</span>
+                  <span className="font-sans text-4xl md:text-7xl opacity-60 font-light">&</span>
                   <span>Davide</span>
                 </h1>
                 
-                <p className="text-lg md:text-2xl font-semibold tracking-widest drop-shadow-[0_0_10px_rgba(255,255,255,1)]">
+                <p className="font-sans text-xl md:text-2xl font-bold tracking-widest">
                   2 Giugno 2026
                 </p>
               </div>
               
-              {/* PULSANTE RSVP: AGGIORNATO STATO ACTIVE PER MOBILE */}
+              {/* PULSANTE RSVP: Angoli squadrati (rounded-none) */}
               <a 
                 href="#rsvp" 
-                className="mt-10 border border-stone-400 px-8 py-3 uppercase tracking-widest text-xs bg-white/60 md:bg-stone-100/20 backdrop-blur-sm text-stone-800 font-bold shadow-[0_4px_15px_rgba(0,0,0,0.05)] transition-all duration-200 
-                           hover:bg-stone-800 hover:text-white hover:border-stone-800 
-                           active:bg-stone-800 active:text-white active:scale-95"
+                className="font-sans mt-8 md:mt-10 border border-stone-400 px-8 py-4 uppercase tracking-widest text-xs md:text-sm bg-white/70 md:bg-stone-100/20 backdrop-blur-md text-stone-800 font-bold shadow-lg transition-all duration-200 hover:bg-stone-800 hover:text-white hover:border-stone-800 active:bg-stone-800 active:text-white active:scale-95 rounded-none"
               >
                 Conferma Presenza
               </a>
@@ -130,8 +132,8 @@ function App() {
             <div className="flex justify-center gap-4 md:gap-8 max-w-lg mx-auto">
               {Object.entries(timeLeft).map(([unit, value]) => (
                 <div key={unit} className="flex flex-col items-center w-16 md:w-24">
-                  <span className="text-4xl font-serif text-stone-800 mb-2">{value}</span>
-                  <span className="text-[10px] uppercase tracking-widest text-stone-400">{unit}</span>
+                  <span className="font-serif text-4xl md:text-5xl text-stone-800 mb-2">{value}</span>
+                  <span className="font-sans text-xs uppercase tracking-widest text-stone-400">{unit}</span>
                 </div>
               ))}
             </div>
@@ -151,17 +153,29 @@ function App() {
           {/* 4. DETTAGLI EVENTO */}
           <section className="py-16 bg-white px-4 border-t border-stone-100">
             <div className="max-w-xl mx-auto text-center">
-              <div className="p-8 bg-[#FAF9F6] shadow-xl border border-stone-100 rounded-sm relative overflow-hidden">
+              <div className="p-8 md:p-12 bg-[#FAF9F6] shadow-xl border border-stone-100 rounded-sm relative overflow-hidden">
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-[#d5c5b3]"></div>
-                <h3 className="font-serif text-3xl mb-6 italic">Il Matrimonio</h3>
-                <p className="text-stone-500 uppercase text-sm mb-1">Ore 11:00 • Cerimonia & Ricevimento</p>
-                <div className="my-8">
-                  <p className="font-semibold text-lg text-stone-700 mb-2">Casina di Poggio della Rota</p>
-                  <p className="text-stone-500 text-sm">Bassano Romano (VT)</p>
+                
+                <h3 className="font-serif text-3xl md:text-4xl mb-4 italic text-stone-800">Il Matrimonio</h3>
+                
+                <div className="inline-block border-b border-t border-stone-200 py-4 my-4">
+                  <p className="font-sans text-stone-700 uppercase text-xs md:text-sm tracking-[0.2em] font-bold">
+                    Cerimonia & Pranzo
+                  </p>
+                  <p className="font-serif italic text-stone-500 text-sm md:text-base mt-2 px-4">
+                    Si terranno entrambi presso la stessa location
+                  </p>
                 </div>
+
+                <div className="my-8">
+                  <p className="font-sans text-stone-400 uppercase text-xs tracking-widest mb-3 font-semibold">Inizio alle ore 11:00</p>
+                  <p className="font-sans font-bold text-xl md:text-2xl text-stone-700 mb-2">Casina di Poggio della Rota</p>
+                  <p className="font-sans text-stone-500 text-sm md:text-base tracking-wide">Bassano Romano (VT)</p>
+                </div>
+                
                 <div className="flex flex-col gap-4">
-                  <a href="https://share.google/jmGM4mhHfumAxYPBS" target="_blank" rel="noreferrer" className="w-full bg-stone-800 text-white py-3 text-xs uppercase tracking-widest hover:bg-stone-700 active:scale-95 transition shadow-md">Apri Mappa</a>
-                  <a href={googleCalendarLink} target="_blank" rel="noreferrer" className="w-full border border-stone-300 text-stone-600 py-3 text-xs uppercase tracking-widest hover:bg-stone-50 active:scale-95 transition shadow-sm">Aggiungi al Calendario</a>
+                  <a href="https://share.google/jmGM4mhHfumAxYPBS" target="_blank" rel="noreferrer" className="font-sans w-full bg-stone-800 text-white py-3 md:py-4 text-xs md:text-sm uppercase tracking-widest hover:bg-stone-700 active:scale-95 transition shadow-md rounded-sm">Apri Mappa</a>
+                  <a href={googleCalendarLink} target="_blank" rel="noreferrer" className="font-sans w-full border border-stone-300 text-stone-600 py-3 md:py-4 text-xs md:text-sm uppercase tracking-widest hover:bg-stone-50 active:scale-95 transition shadow-sm rounded-sm">Aggiungi al Calendario</a>
                 </div>
               </div>
             </div>
@@ -170,46 +184,59 @@ function App() {
           {/* 5. LISTA NOZZE */}
           <section className="py-20 bg-[#ebe6df] px-6 text-center">
             <div className="max-w-xl mx-auto">
-               <h2 className="font-serif text-3xl italic text-stone-800 mb-6">Un pensiero per noi</h2>
-               <p className="text-stone-600 text-sm mb-10 leading-relaxed italic">"La vostra presenza è per noi il dono più bello. Se tuttavia desiderate farci un pensiero, sarà gradito."</p>
-               <div className="bg-white p-8 shadow-sm border border-stone-200">
-                  <p className="text-[10px] uppercase tracking-widest text-stone-400 mb-3">IBAN</p>
-                  <p className="font-mono text-stone-700 tracking-wider break-all text-sm md:text-base">IT00 0000 0000 0000 0000 0000 000</p>
-                  <p className="text-xs text-stone-400 mt-2 italic">Intestato a Krizia e Davide</p>
+               <h2 className="font-serif text-3xl md:text-4xl italic text-stone-800 mb-6">Un pensiero per noi</h2>
+               <p className="font-serif text-stone-600 text-base md:text-lg mb-10 leading-relaxed italic">"La vostra presenza è per noi il dono più bello. Se tuttavia desiderate farci un pensiero, sarà gradito."</p>
+               <div className="bg-white p-8 md:p-10 shadow-sm border border-stone-200 rounded-sm">
+                  <p className="font-sans text-xs uppercase tracking-widest text-stone-400 mb-3 font-semibold">Coordinate Bancarie</p>
+                  <p className="font-mono text-stone-700 tracking-wider break-all text-sm md:text-lg mb-6 font-medium">IT46 Y032 6822 3000 5242 2747 860</p>
+                  
+                  <div className="flex flex-col gap-3 text-left bg-stone-50 p-4 rounded-sm">
+                    <p className="font-serif text-sm md:text-base text-stone-600 italic">
+                      <span className="font-sans font-bold not-italic uppercase text-[10px] md:text-xs text-stone-400 tracking-widest mr-2">Intestato a:</span> 
+                      Davide Moscatelli o Krizia Piciucchi
+                    </p>
+                    <p className="font-serif text-sm md:text-base text-stone-600 italic">
+                      <span className="font-sans font-bold not-italic uppercase text-[10px] md:text-xs text-stone-400 tracking-widest mr-2">Causale:</span> 
+                      Regalo di matrimonio
+                    </p>
+                  </div>
                </div>
             </div>
           </section>
 
           {/* 6. RSVP FORM WHATSAPP */}
           <section id="rsvp" className="py-20 bg-stone-900 text-white px-6 text-center">
-            <h2 className="font-serif text-4xl mb-4 italic">Ci sarai?</h2>
-            <p className="mb-10 text-stone-400 text-sm">Conferma via WhatsApp entro il 2 Maggio 2026</p>
+            <h2 className="font-serif text-4xl md:text-5xl mb-4 italic">Ci sarai?</h2>
+            <p className="font-sans mb-10 text-stone-300 text-sm md:text-base tracking-wide leading-relaxed">
+              L'invito è esteso a compagni e figli.<br className="hidden md:block"/>
+              Conferma per tutti via WhatsApp entro il <span className="font-bold text-white">2 Maggio 2026</span>.
+            </p>
             
-            <form onSubmit={handleRSVP} className="max-w-md mx-auto flex flex-col gap-6 text-left">
+            <form onSubmit={handleRSVP} className="font-sans max-w-md mx-auto flex flex-col gap-6 text-left">
               <div>
                 <label className="block text-xs uppercase tracking-widest mb-3 text-stone-400 font-semibold">Nome e Cognome</label>
-                <input type="text" name="nome" required className="w-full p-4 bg-stone-800 border-none text-white rounded-sm focus:ring-1 focus:ring-white/20 outline-none transition" />
+                <input type="text" name="nome" required className="w-full p-4 bg-stone-800 border-none text-white rounded-sm focus:ring-1 focus:ring-white/40 outline-none transition" />
               </div>
               
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="flex-1">
                   <label className="block text-xs uppercase tracking-widest mb-3 text-stone-400 font-semibold">Parteciperai?</label>
-                  <select name="presenza" className="w-full p-4 bg-stone-800 border-none text-white rounded-sm appearance-none outline-none focus:ring-1 focus:ring-white/20 transition">
+                  <select name="presenza" className="w-full p-4 bg-stone-800 border-none text-white rounded-sm appearance-none outline-none focus:ring-1 focus:ring-white/40 transition">
                     <option value="Sì, non vedo l'ora!">Sì, non vedo l'ora!</option>
                     <option value="Purtroppo non potrò esserci">Purtroppo non potrò esserci</option>
                   </select>
                 </div>
                 <div className="md:w-32">
                   <label className="block text-xs uppercase tracking-widest mb-3 text-stone-400 font-semibold">In quanti?</label>
-                  <input type="number" name="numeroPersone" min="1" max="10" defaultValue="1" required className="w-full p-4 bg-stone-800 border-none text-white rounded-sm outline-none focus:ring-1 focus:ring-white/20 transition" />
+                  <input type="number" name="numeroPersone" min="1" max="10" defaultValue="1" required className="w-full p-4 bg-stone-800 border-none text-white rounded-sm outline-none focus:ring-1 focus:ring-white/40 transition" />
                 </div>
               </div>
 
               <div>
                 <label className="block text-xs uppercase tracking-widest mb-3 text-stone-400 font-semibold">Allergie o Intolleranze?</label>
-                <textarea name="allergie" rows="2" placeholder="Es. Celiachia, menu vegetariano..." className="w-full p-4 bg-stone-800 border-none text-white rounded-sm outline-none focus:ring-1 focus:ring-white/20 transition"></textarea>
+                <textarea name="allergie" rows="2" placeholder="Es. Celiachia, menu vegetariano..." className="w-full p-4 bg-stone-800 border-none text-white rounded-sm outline-none focus:ring-1 focus:ring-white/40 transition"></textarea>
               </div>
-              <button type="submit" className="mt-6 w-full bg-white text-stone-900 py-4 font-bold uppercase tracking-widest text-sm hover:bg-stone-200 active:scale-95 transition shadow-lg">
+              <button type="submit" className="mt-6 w-full bg-white text-stone-900 py-4 font-bold uppercase tracking-widest text-sm hover:bg-stone-200 active:scale-95 transition shadow-lg rounded-sm">
                 Invia Conferma su WhatsApp
               </button>
             </form>
